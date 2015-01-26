@@ -1,0 +1,16 @@
+BAZA:
+	samochody
+rodzaj: rodzinny, terenowy, sportowy  (3 grona)
+
+CREATE TABLE auto (
+	id INT not null primary key GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+	rodzaj1 CHAR(8) not null,
+	rodzaj2 CHAR(8),
+	rodzaj3 CHAR(8),
+	marka CHAR(20) not null,
+	moc INT(3) not null
+);
+
+dodaæ kilkanaœcie samochodów
+
+poprawne wyœwietlanie gron (7 gron, jeden obiekt tylko w jednym gronie)
