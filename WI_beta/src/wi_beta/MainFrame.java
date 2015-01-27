@@ -348,6 +348,7 @@ public class MainFrame extends javax.swing.JFrame {
                     }
                     
                     jScrollPane1.removeAll();
+                    
                     //jScrollPane1.repaint();
                     
                     //TODO - remove okregow
