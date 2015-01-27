@@ -4,6 +4,8 @@
  */
 package wi_beta;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -14,7 +16,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -36,6 +40,15 @@ public class MainFrame extends javax.swing.JFrame {
     public String[] categories;
     
     List<Element> elementsList;
+    
+    //0 - {1}
+    //1 - {2}
+    //2 - {3}
+    //3 - {1, 2}
+    //4 - {1, 3}
+    //5 - {2, 3}
+    //6 - {1, 2, 3}
+    Map<Integer, List<Element>> elementsMap;
     
     public MainFrame() {
         initComponents();
@@ -64,6 +77,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jRadioButton1 = new javax.swing.JRadioButton();
         jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -93,6 +107,7 @@ public class MainFrame extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(700, 480));
 
         jPanel1.setLayout(new java.awt.BorderLayout());
+        jPanel1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -128,7 +143,7 @@ public class MainFrame extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -151,7 +166,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(jLabel5)
                     .addComponent(jLabel4))
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jSeparator2)
         );
         jPanel2Layout.setVerticalGroup(
@@ -236,9 +251,9 @@ public class MainFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -297,6 +312,8 @@ public class MainFrame extends javax.swing.JFrame {
                     
                     jLabel4.setText("ile: "+elementsList.size());
                     
+                    groupSet();
+                    
                     
                      } catch (FileNotFoundException ex) {
                     Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -309,16 +326,63 @@ public class MainFrame extends javax.swing.JFrame {
 
 //usuwanie elementu    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        for (Element el : elementsList)
+        //for (Element el : elementsList)
         {
-            System.out.println("====================");
-            System.out.println("name: "+el.getName());
-            System.out.println("c1: "+el.isCategory1());
-            System.out.println("c2: "+el.isCategory2());
-            System.out.println("c3: "+el.isCategory3());
-            System.out.println("p1: "+el.getParam1());
-            System.out.println("p2: "+el.getParam2());
-            System.out.println("p3: "+el.getParam3());
+        System.out.println("mapa");
+        Integer[] rozmiar = new Integer[7];
+                    for (int i = 0; i < 7; i++)
+                    {
+                        rozmiar[i] = 0;
+                        //TODO - inicjalizacja mapy
+                        if (elementsMap != null)
+                        if (elementsMap.get(i) != null)
+                        {
+                            System.out.println(i +" - "+elementsMap.get(i).size());
+                            rozmiar[i] = elementsMap.get(i).size();
+                        }
+                        else
+                        {
+                            System.out.println(i +" - 0");
+                            rozmiar[i] = 0;
+                        }
+                    }
+                    
+                    jScrollPane1.removeAll();
+                    //jScrollPane1.repaint();
+                    
+                    //TODO - remove okregow
+            System.out.println("szerokosc: "+jScrollPane1.getWidth());
+            System.out.println("wysokosc: "+jScrollPane1.getHeight());
+            System.out.println("x: "+jScrollPane1.getX());
+            System.out.println("y: "+jScrollPane1.getY());
+            Graphics g = jScrollPane1.getGraphics();
+            g.setColor(Color.red);
+            g.drawOval(jScrollPane1.getWidth()/2, 50, rozmiar[0]*20, rozmiar[0]*20);
+            g.dispose();
+            jScrollPane1.print(g);
+            
+            g = jScrollPane1.getGraphics();
+            g.setColor(Color.GREEN);
+            g.drawOval(jScrollPane1.getWidth()/2, 150, rozmiar[1]*20, rozmiar[1]*20);
+            g.dispose();
+            jScrollPane1.print(g);
+            
+            g = jScrollPane1.getGraphics();
+            g.setColor(Color.BLUE);
+            g.drawOval(jScrollPane1.getWidth()/2, 250, rozmiar[2]*20, rozmiar[2]*20);
+            g.dispose();
+            jScrollPane1.print(g);
+            
+//            System.out.println("====================");
+//            System.out.println("name: "+el.getName());
+//            System.out.println("c1: "+el.isCategory1());
+//            System.out.println("c2: "+el.isCategory2());
+//            System.out.println("c3: "+el.isCategory3());
+//            System.out.println("p1: "+el.getParam1());
+//            System.out.println("p2: "+el.getParam2());
+//            System.out.println("p3: "+el.getParam3());
+//            
+            
         }
         jLabel4.setText("ile: "+elementsList.size());
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -375,7 +439,46 @@ public class MainFrame extends javax.swing.JFrame {
         });
     }
     
-    public void createXML()
+    public void groupSet()
+    {
+        elementsMap = new HashMap<>();
+        elementsMap.put(0, new ArrayList<Element>());
+        elementsMap.put(1, new ArrayList<Element>());
+        elementsMap.put(2, new ArrayList<Element>());
+        elementsMap.put(3, new ArrayList<Element>());
+        elementsMap.put(4, new ArrayList<Element>());
+        elementsMap.put(5, new ArrayList<Element>());
+        elementsMap.put(6, new ArrayList<Element>());
+        
+        for (Element el : elementsList)
+        {
+            if (el.isCategory1())
+            {
+                if (el.isCategory2())
+                {
+                    if (el.isCategory3())
+                        elementsMap.get(6).add(el);
+                    else
+                        elementsMap.get(3).add(el);
+                }
+                else if (el.isCategory3())
+                    elementsMap.get(4).add(el);
+                else
+                    elementsMap.get(0).add(el);
+            }
+            else if (el.isCategory2())
+            {
+                if (el.isCategory3())
+                    elementsMap.get(5).add(el);
+                else
+                    elementsMap.get(1).add(el);
+            }
+            else if (el.isCategory3())
+                elementsMap.get(2).add(el);      
+        }
+    }
+    
+    private void createXML()
     {
         String result = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
         
@@ -587,6 +690,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     // End of variables declaration//GEN-END:variables

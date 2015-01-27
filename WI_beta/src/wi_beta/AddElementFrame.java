@@ -203,6 +203,7 @@ public class AddElementFrame extends javax.swing.JFrame {
         if (checkValues(element))
         {
             parent.addElement(element);
+            parent.groupSet();
             this.setVisible(false);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
