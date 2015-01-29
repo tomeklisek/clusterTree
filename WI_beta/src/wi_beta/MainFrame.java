@@ -6,6 +6,7 @@ package wi_beta;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -21,9 +22,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 
 /**
  *
@@ -104,9 +109,12 @@ public class MainFrame extends javax.swing.JFrame {
         jRadioButton1.setText("jRadioButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(700, 480));
 
         jPanel1.setLayout(new java.awt.BorderLayout());
+
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        jScrollPane1.setAutoscrolls(true);
         jPanel1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -348,32 +356,38 @@ public class MainFrame extends javax.swing.JFrame {
                     }
                     
                     jScrollPane1.removeAll();
+                    jScrollPane1.getGraphics().clearRect(1, 1, jScrollPane1.getViewport().getWidth(), jScrollPane1.getViewport().getHeight());
                     
-                    //jScrollPane1.repaint();
-                    
-                    //TODO - remove okregow
             System.out.println("szerokosc: "+jScrollPane1.getWidth());
             System.out.println("wysokosc: "+jScrollPane1.getHeight());
             System.out.println("x: "+jScrollPane1.getX());
             System.out.println("y: "+jScrollPane1.getY());
             Graphics g = jScrollPane1.getGraphics();
             g.setColor(Color.red);
-            g.drawOval(jScrollPane1.getWidth()/2, 50, rozmiar[0]*20, rozmiar[0]*20);
+            g.drawRect(10, 10, rozmiar[0]*20, rozmiar[0]*20);
             g.dispose();
-            jScrollPane1.print(g);
+            JPanel panel2 = new JPanel();
+            panel2.setSize(1200, 200);
+            panel2.print(g);
             
             g = jScrollPane1.getGraphics();
             g.setColor(Color.GREEN);
-            g.drawOval(jScrollPane1.getWidth()/2, 150, rozmiar[1]*20, rozmiar[1]*20);
+            g.drawRect(10, rozmiar[0]*20 + 20, rozmiar[1]*20, rozmiar[1]*20);
             g.dispose();
-            jScrollPane1.print(g);
-            
+            panel2.print(g);
+
+                
             g = jScrollPane1.getGraphics();
             g.setColor(Color.BLUE);
-            g.drawOval(jScrollPane1.getWidth()/2, 250, rozmiar[2]*20, rozmiar[2]*20);
+            g.drawOval(10, rozmiar[0]*20 + rozmiar[1]*20 + 30, rozmiar[2]*20, rozmiar[2]*20);
             g.dispose();
-            jScrollPane1.print(g);
-            
+            panel2.print(g);
+
+            jScrollPane1.getViewport().add(panel2);
+            System.out.println("szerokosc: "+jScrollPane1.getWidth());
+            System.out.println("wysokosc: "+jScrollPane1.getHeight());
+            System.out.println("szerokosc: "+jScrollPane1.getViewport().getWidth());
+            System.out.println("wysokosc: "+jScrollPane1.getViewport().getHeight());
 //            System.out.println("====================");
 //            System.out.println("name: "+el.getName());
 //            System.out.println("c1: "+el.isCategory1());
