@@ -8,7 +8,6 @@ package wi_beta;
 
 import java.awt.Color;
 import javax.swing.JFrame;
-import static wi_beta.AddElementFrame.parent;
 
 /**
  *
@@ -21,8 +20,8 @@ public class NewProjectFrame extends javax.swing.JFrame {
      */
     public static MainFrame parent;
     
-    private Integer[] colorsDictionary = new Integer[3];
-    private Color[] colors = new Color[3];
+    private final Integer[] colorsDictionary = new Integer[3];
+    private final Color[] colors = new Color[3];
     
     public NewProjectFrame(JFrame parent) {
         initComponents();
@@ -64,6 +63,7 @@ public class NewProjectFrame extends javax.swing.JFrame {
         jComboBox3 = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -81,7 +81,7 @@ public class NewProjectFrame extends javax.swing.JFrame {
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Czerwony", "Zielony", "Niebieski" }));
 
-        jButton1.setText("Zatwierdź");
+        jButton1.setText("zatwierdź");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -89,6 +89,13 @@ public class NewProjectFrame extends javax.swing.JFrame {
         });
 
         jLabel5.setText("kolor zbioru:");
+
+        jButton2.setText("anuluj");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -120,7 +127,9 @@ public class NewProjectFrame extends javax.swing.JFrame {
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,27 +154,32 @@ public class NewProjectFrame extends javax.swing.JFrame {
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41)
-                .addComponent(jButton1)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+//zatwierdz    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (checkValues())
         {
             parent.categories[0] = jTextField1.getText();
             parent.categories[1] = jTextField2.getText();
-            parent.categories[2] = jTextField3.getText();
-            
-            parent.groupSet();
+            parent.categories[2] = jTextField3.getText(); 
             parent.reprintScreen();
-            
-            
+
             this.setVisible(false);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+//anuluj    
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -272,6 +286,7 @@ public class NewProjectFrame extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboBox3;
