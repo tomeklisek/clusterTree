@@ -204,6 +204,7 @@ public class AddElementFrame extends javax.swing.JFrame {
         {
             parent.addElement(element);
             parent.groupSet();
+            parent.reprintScreen();
             this.setVisible(false);
         }
     }//GEN-LAST:event_jButton1ActionPerformed

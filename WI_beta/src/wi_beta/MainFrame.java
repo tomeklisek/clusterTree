@@ -46,6 +46,10 @@ public class MainFrame extends javax.swing.JFrame {
     
     List<Element> elementsList;
     
+    public Color color1 = Color.RED;
+    public Color color2 = Color.GREEN;
+    public Color color3 = Color.BLUE;
+    
     //0 - {1}
     //1 - {2}
     //2 - {3}
@@ -89,16 +93,22 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -125,11 +135,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel3.setText("Kategoria3:");
 
-        jLabel4.setText("jLabel4");
-
-        jLabel5.setText("jLabel5");
-
-        jLabel6.setText("jLabel6");
+        jLabel4.setText("ilość elementów:");
 
         jButton1.setText("Dodaj obiekt");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -138,7 +144,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Usuń obiekt");
+        jButton2.setText("Przerysuj");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -156,6 +162,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(45, 45, 45))
+            .addComponent(jSeparator2)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,11 +178,15 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel9))
-                    .addComponent(jLabel6)
+                    .addComponent(jLabel4)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel14))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jSeparator2)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,11 +207,21 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
@@ -210,6 +231,14 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         jMenu1.setText("Plik");
+
+        jMenuItem6.setText("Nowy projekt");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem6);
 
         jMenuItem1.setText("Pobierz dane");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -299,7 +328,8 @@ public class MainFrame extends javax.swing.JFrame {
 
 //pobierz dane    
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        JFileChooser fc = new JFileChooser("F:/dev/git/clusterTree/WI_beta/dane");   
+        //JFileChooser fc = new JFileChooser("F:/dev/git/clusterTree/WI_beta/dane");  
+        JFileChooser fc = new JFileChooser("C:/Users/student/Documents/GitHub/clusterTree/WI_beta/dane"); 
         fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
         int value = fc.showOpenDialog(null);
         
@@ -321,7 +351,7 @@ public class MainFrame extends javax.swing.JFrame {
                     jLabel4.setText("ile: "+elementsList.size());
                     
                     groupSet();
-                    
+                    reprintScreen();
                     
                      } catch (FileNotFoundException ex) {
                     Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -337,57 +367,7 @@ public class MainFrame extends javax.swing.JFrame {
         //for (Element el : elementsList)
         {
         System.out.println("mapa");
-        Integer[] rozmiar = new Integer[7];
-                    for (int i = 0; i < 7; i++)
-                    {
-                        rozmiar[i] = 0;
-                        //TODO - inicjalizacja mapy
-                        if (elementsMap != null)
-                        if (elementsMap.get(i) != null)
-                        {
-                            System.out.println(i +" - "+elementsMap.get(i).size());
-                            rozmiar[i] = elementsMap.get(i).size();
-                        }
-                        else
-                        {
-                            System.out.println(i +" - 0");
-                            rozmiar[i] = 0;
-                        }
-                    }
-                    
-                    jScrollPane1.removeAll();
-                    jScrollPane1.getGraphics().clearRect(1, 1, jScrollPane1.getViewport().getWidth(), jScrollPane1.getViewport().getHeight());
-                    
-            System.out.println("szerokosc: "+jScrollPane1.getWidth());
-            System.out.println("wysokosc: "+jScrollPane1.getHeight());
-            System.out.println("x: "+jScrollPane1.getX());
-            System.out.println("y: "+jScrollPane1.getY());
-            Graphics g = jScrollPane1.getGraphics();
-            g.setColor(Color.red);
-            g.drawRect(10, 10, rozmiar[0]*20, rozmiar[0]*20);
-            g.dispose();
-            JPanel panel2 = new JPanel();
-            panel2.setSize(1200, 200);
-            panel2.print(g);
-            
-            g = jScrollPane1.getGraphics();
-            g.setColor(Color.GREEN);
-            g.drawRect(10, rozmiar[0]*20 + 20, rozmiar[1]*20, rozmiar[1]*20);
-            g.dispose();
-            panel2.print(g);
-
-                
-            g = jScrollPane1.getGraphics();
-            g.setColor(Color.BLUE);
-            g.drawOval(10, rozmiar[0]*20 + rozmiar[1]*20 + 30, rozmiar[2]*20, rozmiar[2]*20);
-            g.dispose();
-            panel2.print(g);
-
-            jScrollPane1.getViewport().add(panel2);
-            System.out.println("szerokosc: "+jScrollPane1.getWidth());
-            System.out.println("wysokosc: "+jScrollPane1.getHeight());
-            System.out.println("szerokosc: "+jScrollPane1.getViewport().getWidth());
-            System.out.println("wysokosc: "+jScrollPane1.getViewport().getHeight());
+        reprintScreen();
 //            System.out.println("====================");
 //            System.out.println("name: "+el.getName());
 //            System.out.println("c1: "+el.isCategory1());
@@ -418,6 +398,15 @@ public class MainFrame extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+//nowy projekt    
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        elementsList = new ArrayList<Element>();
+        
+        new NewProjectFrame(this);
+
+        jLabel4.setText("Ilość elementów: "+elementsList.size());
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -452,6 +441,123 @@ public class MainFrame extends javax.swing.JFrame {
                 new MainFrame().setVisible(true);
             }
         });
+    }
+    
+    public void reprintScreen()
+    {
+        int rozmiarElementu = 10;
+        int rozmiarZbioru = 100;
+        Integer[] rozmiar = new Integer[7];
+        for (int i = 0; i < 7; i++)
+        {
+            rozmiar[i] = 0;
+            //TODO - inicjalizacja mapy
+            if (elementsMap != null)
+            if (elementsMap.get(i) != null)
+            {
+                rozmiar[i] = elementsMap.get(i).size();
+            }
+            else
+            {
+                System.out.println(i +" - 0");
+                rozmiar[i] = 0;
+            }
+        }
+
+        jLabel7.setText(categories[0]);
+        jLabel8.setText(categories[1]);
+        jLabel9.setText(categories[2]);
+        
+        jScrollPane1.removeAll();
+        jScrollPane1.getGraphics().clearRect(1, 1, jScrollPane1.getViewport().getWidth(), jScrollPane1.getViewport().getHeight());
+                 
+/////////1
+        Graphics g = jScrollPane1.getGraphics();
+        g.setColor(color1);
+        g.drawRect(10, 10, rozmiarZbioru, rozmiarZbioru);
+        int tempx = 0;
+        int tempy = 0;
+        for (Element el : elementsMap.get(0))
+        {   
+            g.setColor(Color.PINK);
+            g.fillOval(10+2+tempx, 10+2+tempy, rozmiarElementu, rozmiarElementu);
+            tempx += rozmiarElementu+2;
+            if (tempx + rozmiarElementu > rozmiarZbioru)
+            {
+                tempy += rozmiarElementu + 4;
+                tempx = 0;
+            }
+        }
+        g.dispose();
+        JPanel panel2 = new JPanel();
+        panel2.setSize(1200, 200);
+        panel2.print(g);
+
+/////////2
+        g = jScrollPane1.getGraphics();
+        g.setColor(color2);
+        g.drawRect(10, rozmiarZbioru + 20, rozmiarZbioru, rozmiarZbioru);
+        tempx = 0;
+        tempy = rozmiarZbioru + 8;
+        for (Element el : elementsMap.get(1))
+        {   
+            g.setColor(Color.PINK);
+            g.fillOval(10+2+tempx, 10+2+tempy, rozmiarElementu, rozmiarElementu);
+            tempx += rozmiarElementu+2;
+            if (tempx + rozmiarElementu > rozmiarZbioru)
+            {
+                tempy += rozmiarElementu + 4;
+                tempx = 0;
+            }
+        }
+        g.dispose();
+        panel2.print(g);
+
+/////////3
+        g = jScrollPane1.getGraphics();
+        g.setColor(color3);
+        g.drawRect(10, 2*rozmiarZbioru + 30, rozmiarZbioru, rozmiarZbioru);
+        tempx = 0;
+        tempy = 2*rozmiarZbioru + 20;
+        for (Element el : elementsMap.get(2))
+        {   
+            g.setColor(Color.PINK);
+            g.fillOval(10+2+tempx, 10+2+tempy, rozmiarElementu, rozmiarElementu);
+            tempx += rozmiarElementu+2;
+            if (tempx + rozmiarElementu > rozmiarZbioru)
+            {
+                tempy += rozmiarElementu + 4;
+                tempx = 0;
+            }
+        }
+        g.dispose();
+        panel2.print(g);
+
+/////////4
+        g = jScrollPane1.getGraphics();
+        g.setColor(Color.CYAN);
+        g.drawRect(30 + rozmiarZbioru, 10 + rozmiarZbioru/2, rozmiarZbioru/2, rozmiarZbioru/2);
+        tempx = 0;
+        tempy = 0;
+        for (Element el : elementsMap.get(3))
+        {   
+            g.setColor(Color.PINK);
+            g.fillOval(30 + rozmiarZbioru+2+tempx, 10 + rozmiarZbioru/2+2+tempy, rozmiarElementu, rozmiarElementu);
+            tempx += rozmiarElementu+2;
+            if (tempx + rozmiarElementu > rozmiarZbioru)
+            {
+                tempy += rozmiarElementu + 4;
+                tempx = 0;
+            }
+        }
+        g.dispose();
+        panel2.print(g);
+        
+        jScrollPane1.getViewport().add(panel2);
+        System.out.println("szerokosc: "+jScrollPane1.getWidth());
+        System.out.println("wysokosc: "+jScrollPane1.getHeight());
+        System.out.println("szerokosc: "+jScrollPane1.getViewport().getWidth());
+        System.out.println("wysokosc: "+jScrollPane1.getViewport().getHeight());
     }
     
     public void groupSet()
@@ -491,6 +597,22 @@ public class MainFrame extends javax.swing.JFrame {
             else if (el.isCategory3())
                 elementsMap.get(2).add(el);      
         }
+        
+        //0 - {1}
+    //1 - {2}
+    //2 - {3}
+    //3 - {1, 2}
+    //4 - {1, 3}
+    //5 - {2, 3}
+    //6 - {1, 2, 3}
+        
+        jLabel5.setText("["+categories[0]+"] : \n"+elementsMap.get(0).size());
+        jLabel6.setText("["+categories[1]+"] : \n"+elementsMap.get(1).size());
+        jLabel10.setText("["+categories[2]+"] : \n"+elementsMap.get(2).size());
+        jLabel11.setText("["+categories[0]+", "+categories[1]+"] : "+elementsMap.get(3).size());
+        jLabel12.setText("["+categories[0]+", "+categories[2]+"] : "+elementsMap.get(4).size());
+        jLabel13.setText("["+categories[1]+", "+categories[2]+"] : "+elementsMap.get(5).size());
+        jLabel14.setText("["+categories[0]+", "+categories[1]+", "+categories[2]+"] : "+elementsMap.get(6).size());
     }
     
     private void createXML()
@@ -686,6 +808,11 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -702,6 +829,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JRadioButton jRadioButton1;
