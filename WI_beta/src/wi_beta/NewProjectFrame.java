@@ -170,9 +170,10 @@ public class NewProjectFrame extends javax.swing.JFrame {
             parent.categories[0] = jTextField1.getText();
             parent.categories[1] = jTextField2.getText();
             parent.categories[2] = jTextField3.getText(); 
+            this.setVisible(false);
             parent.reprintScreen();
 
-            this.setVisible(false);
+            parent.jButton1.setEnabled(true);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

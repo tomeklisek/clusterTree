@@ -4,8 +4,10 @@
  */
 package wi_beta;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -44,12 +46,21 @@ public class MainFrame extends javax.swing.JFrame {
     
     public String[] categories;
     
+    private Integer[] sizeOfCluster;
     List<Element> elementsList;
     
     public Color color1 = Color.RED;
     public Color color2 = Color.GREEN;
     public Color color3 = Color.BLUE;
+    public Color color4 = Color.ORANGE;
+    public Color color5 = Color.YELLOW;
+    public Color color6 = Color.MAGENTA;
+    public Color color7 = Color.CYAN;
     
+    private Integer elementSize = 12;
+    
+    private int WIDTH;
+    private int HEIGHT;
     //0 - {1}
     //1 - {2}
     //2 - {3}
@@ -62,10 +73,21 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         
+        WIDTH = jScrollPane1.getWidth();
+        HEIGHT = jScrollPane1.getHeight();
+        
         categories = new String[3];
         categories[0] = "";
         categories[1] = "";
         categories[2] = "";
+        
+        jButton1.setEnabled(false);
+        
+//        color4 = new Color((color1.getRGB() + color2.getRGB())/2);
+//        color5 = new Color((color1.getRGB() + color3.getRGB())/2);
+//        color6 = new Color((color2.getRGB() + color2.getRGB())/2);
+//        color7 = new Color((color1.getRGB() + color2.getRGB() + color3.getRGB())/3);
+        
         
         inputFile = null;
         elementsList = new ArrayList<>();
@@ -122,8 +144,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         jScrollPane1.setAutoscrolls(true);
         jPanel1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
@@ -186,7 +206,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jLabel12)
                     .addComponent(jLabel13)
                     .addComponent(jLabel14))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -328,8 +348,9 @@ public class MainFrame extends javax.swing.JFrame {
 
 //pobierz dane    
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        //JFileChooser fc = new JFileChooser("F:/dev/git/clusterTree/WI_beta/dane");  
-        JFileChooser fc = new JFileChooser("C:/Users/student/Documents/GitHub/clusterTree/WI_beta/dane"); 
+//        JFileChooser fc = new JFileChooser("F:/dev/git/clusterTree/WI_beta/dane");  
+        JFileChooser fc = new JFileChooser("D:/studia/studia/Android/Git storage/clusterTree/WI_beta/dane");  
+        //JFileChooser fc = new JFileChooser("C:/Users/student/Documents/GitHub/clusterTree/WI_beta/dane"); 
         fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
         int value = fc.showOpenDialog(null);
         
@@ -352,6 +373,7 @@ public class MainFrame extends javax.swing.JFrame {
                     
                     groupSet();
                     reprintScreen();
+                    jButton1.setEnabled(true);
                     
                      } catch (FileNotFoundException ex) {
                     Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -364,28 +386,25 @@ public class MainFrame extends javax.swing.JFrame {
 
 //usuwanie elementu    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        //for (Element el : elementsList)
-        {
-        System.out.println("mapa");
         reprintScreen();
-//            System.out.println("====================");
-//            System.out.println("name: "+el.getName());
-//            System.out.println("c1: "+el.isCategory1());
-//            System.out.println("c2: "+el.isCategory2());
-//            System.out.println("c3: "+el.isCategory3());
-//            System.out.println("p1: "+el.getParam1());
-//            System.out.println("p2: "+el.getParam2());
-//            System.out.println("p3: "+el.getParam3());
-//            
-            
-        }
-        jLabel4.setText("ile: "+elementsList.size());
+
+        //TODO - roundUP - pierwiastek bedzie rozmiarem zbioru : ilosc elementow*rozmiarEL
+        System.out.println("9: "+Math.round(Math.sqrt(9)));
+        System.out.println("10: "+Math.round(Math.sqrt(10)));
+        System.out.println("11: "+Math.round(Math.sqrt(11)));
+        System.out.println("12: "+Math.round(Math.sqrt(12)));
+        System.out.println("13: "+Math.round(Math.sqrt(13)));
+        System.out.println("14: "+Math.round(Math.sqrt(14)));
+        System.out.println("15: "+Math.round(Math.sqrt(15)));
+        System.out.println("16: "+Math.round(Math.sqrt(16)));
+        System.out.println("16: "+Math.round(Math.sqrt(17)));
+        //jLabel4.setText("ile: "+elementsList.size());
     }//GEN-LAST:event_jButton2ActionPerformed
 
 //zapis zbioru    
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-//        JFileChooser fc = new JFileChooser("F:/java/projects/WI_beta/dane");   
-        JFileChooser fc = new JFileChooser("C:/Users/student/Documents/GitHub/clusterTree/WI_beta/dane"); 
+        JFileChooser fc = new JFileChooser("F:/java/projects/WI_beta/dane");   
+//        JFileChooser fc = new JFileChooser("C:/Users/student/Documents/GitHub/clusterTree/WI_beta/dane"); 
         fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
         int value = fc.showOpenDialog(null);
    
@@ -447,23 +466,19 @@ public class MainFrame extends javax.swing.JFrame {
     public void reprintScreen()
     {
         groupSet();
-        int rozmiarElementu = 10;
-        int rozmiarZbioru = 100;
-        Integer[] rozmiar = new Integer[7];
+
+        WIDTH = jScrollPane1.getWidth();
+        HEIGHT = jScrollPane1.getHeight();
+        
+        sizeOfCluster = new Integer[7];
         for (int i = 0; i < 7; i++)
         {
-            rozmiar[i] = 0;
-            //TODO - inicjalizacja mapy
+            sizeOfCluster[i] = 0;
             if (elementsMap != null)
             if (elementsMap.get(i) != null)
-            {
-                rozmiar[i] = elementsMap.get(i).size();
-            }
+                sizeOfCluster[i] = elementsMap.get(i).size();
             else
-            {
-                System.out.println(i +" - 0");
-                rozmiar[i] = 0;
-            }
+                sizeOfCluster[i] = 0;
         }
 
         jLabel7.setText(categories[0]);
@@ -473,152 +488,54 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane1.removeAll();
         jScrollPane1.getGraphics().clearRect(1, 1, jScrollPane1.getViewport().getWidth(), jScrollPane1.getViewport().getHeight());
           
-//TODO - powiazac zmienne lokalizacji
-        //stworzyc metode rysowania zbioru, wywowalnie metodt z odpowiednimi parametrami
-        //np. drawSet(g, color, rozmiarZbioru, rozmiarElementu, idZbioru
-        //dodac napis (nazwa zbioru)
-/////////1
-        Graphics g = jScrollPane1.getGraphics();
-        g.drawString(categories[0], 8, 9);
-        g.setColor(color1);
-        g.drawRect(10, 10, rozmiarZbioru, rozmiarZbioru);
-        int tempx = 0;
-        int tempy = 0;
-        for (Element el : elementsMap.get(0))
-        {   
-            g.setColor(Color.PINK);
-            g.fillOval(10+2+tempx, 10+2+tempy, rozmiarElementu, rozmiarElementu);
-            tempx += rozmiarElementu+2;
-            if (tempx + rozmiarElementu > rozmiarZbioru)
-            {
-                tempy += rozmiarElementu + 4;
-                tempx = 0;
-            }
-        }
-        g.dispose();
         JPanel panel2 = new JPanel();
         panel2.setSize(1200, 200);
-        panel2.print(g);
+       // panel2.print(g);
 
-/////////2
-        g = jScrollPane1.getGraphics();
-        g.setColor(color2); 
-        g.drawRect(10, rozmiarZbioru + 20, rozmiarZbioru, rozmiarZbioru);
-        tempx = 0;
-        tempy = rozmiarZbioru + 8;
-        for (Element el : elementsMap.get(1))
-        {   
-            g.setColor(Color.PINK);
-            g.fillOval(10+2+tempx, 10+2+tempy, rozmiarElementu, rozmiarElementu);
-            tempx += rozmiarElementu+2;
-            if (tempx + rozmiarElementu > rozmiarZbioru)
-            {
-                tempy += rozmiarElementu + 4;
-                tempx = 0;
-            }
-        }
-        g.dispose();
-        panel2.print(g);
-
-/////////3
-        g = jScrollPane1.getGraphics();
-        g.setColor(color3);
-        g.drawRect(10, 2*rozmiarZbioru + 30, rozmiarZbioru, rozmiarZbioru);
-        tempx = 0;
-        tempy = 2*rozmiarZbioru + 20;
-        for (Element el : elementsMap.get(2))
-        {   
-            g.setColor(Color.PINK);
-            g.fillOval(10+2+tempx, 10+2+tempy, rozmiarElementu, rozmiarElementu);
-            tempx += rozmiarElementu+2;
-            if (tempx + rozmiarElementu > rozmiarZbioru)
-            {
-                tempy += rozmiarElementu + 4;
-                tempx = 0;
-            }
-        }
-        g.dispose();
-        panel2.print(g);
-
-/////////4
-        g = jScrollPane1.getGraphics();
-        g.setColor(Color.CYAN);
-        g.drawRect(30 + rozmiarZbioru, 10 + rozmiarZbioru/2, rozmiarZbioru/2, rozmiarZbioru/2);
-        tempx = 0;
-        tempy = 0;
-        for (Element el : elementsMap.get(3))
-        {   
-            g.setColor(Color.PINK);
-            g.fillOval(30 + rozmiarZbioru+2+tempx, 10 + rozmiarZbioru/2+2+tempy, rozmiarElementu, rozmiarElementu);
-            tempx += rozmiarElementu+2;
-            if (tempx + rozmiarElementu > rozmiarZbioru)
-            {
-                tempy += rozmiarElementu + 4;
-                tempx = 0;
-            }
-        }
-        g.dispose();
-        panel2.print(g);
+        int clusterId;
+        int sqrtTemp;
+        int clusterSize = 100;
         
-/////////5
-        g = jScrollPane1.getGraphics();
-        g.setColor(Color.YELLOW);
-        g.drawRect(30 + rozmiarZbioru, 30 + rozmiarZbioru, rozmiarZbioru/2, rozmiarZbioru/2);
-        tempx = 0;
-        tempy = 0;
-        for (Element el : elementsMap.get(4))
-        {   
-            g.setColor(Color.PINK);
-            g.fillOval(30 + rozmiarZbioru+2+tempx, 30 + rozmiarZbioru+2+tempy, rozmiarElementu, rozmiarElementu);
-            tempx += rozmiarElementu+2;
-            if (tempx + rozmiarElementu > rozmiarZbioru)
-            {
-                tempy += rozmiarElementu + 4;
-                tempx = 0;
-            }
-        }
-        g.dispose();
-        panel2.print(g);
-  
-/////////6
-        g = jScrollPane1.getGraphics();
-        g.setColor(Color.MAGENTA);
-        g.drawRect(30 + rozmiarZbioru, rozmiarZbioru*2, rozmiarZbioru/2, rozmiarZbioru/2);
-        tempx = 0;
-        tempy = 0;
-        for (Element el : elementsMap.get(5))
-        {   
-            g.setColor(Color.PINK);
-            g.fillOval(30 + rozmiarZbioru+2+tempx, 30 + rozmiarZbioru*2+2+tempy, rozmiarElementu, rozmiarElementu);
-            tempx += rozmiarElementu+2;
-            if (tempx + rozmiarElementu > rozmiarZbioru)
-            {
-                tempy += rozmiarElementu + 4;
-                tempx = 0;
-            }
-        }
-        g.dispose();
-        panel2.print(g);
- 
-/////////7
-        g = jScrollPane1.getGraphics();
-        g.setColor(Color.ORANGE);
-        g.drawRect(rozmiarZbioru*2 , 30 + rozmiarZbioru, rozmiarZbioru/2, rozmiarZbioru/2);
-        tempx = 0;
-        tempy = 0;
-        for (Element el : elementsMap.get(6))
-        {   
-            g.setColor(Color.PINK);
-            g.fillOval(rozmiarZbioru*2+2+tempx, 30 + rozmiarZbioru+2+tempy, rozmiarElementu, rozmiarElementu);
-            tempx += rozmiarElementu+2;
-            if (tempx + rozmiarElementu > rozmiarZbioru)
-            {
-                tempy += rozmiarElementu + 4;
-                tempx = 0;
-            }
-        }
-        g.dispose();
-        panel2.print(g);
+        System.out.println("=========================================");
+        
+        clusterId = 0;
+        sqrtTemp = (int) Math.round(Math.sqrt(sizeOfCluster[clusterId]));
+        System.out.println(clusterId + " : " + sizeOfCluster[clusterId] + " sqrt : " + sqrtTemp);
+        panel2.print(drawCluster(color1, 10, 10, clusterSize + clusterSize/2, clusterId));
+        
+        clusterId = 1;
+        sqrtTemp = (int) Math.round(Math.sqrt(sizeOfCluster[clusterId]));
+        System.out.println(clusterId + " : " + sizeOfCluster[clusterId] + " sqrt : " + sqrtTemp);
+        panel2.print(drawCluster(color2, WIDTH - 10 - clusterSize - clusterSize/2, 10, clusterSize + clusterSize/2, clusterId));
+        
+        clusterId = 2;
+        sqrtTemp = (int) Math.round(Math.sqrt(sizeOfCluster[clusterId]));
+        System.out.println(clusterId + " : " + sizeOfCluster[clusterId] + " sqrt : " + sqrtTemp);
+        panel2.print(drawCluster(color3, WIDTH/2 - clusterSize + clusterSize/4 + 10, HEIGHT - clusterSize - clusterSize/2 - 10, clusterSize + clusterSize/2, clusterId));
+        
+        clusterId = 3;
+        sqrtTemp = (int) Math.round(Math.sqrt(sizeOfCluster[clusterId]));
+        System.out.println(clusterId + " : " + sizeOfCluster[clusterId] + " sqrt : " + sqrtTemp);
+        if (sizeOfCluster[clusterId] > 0)
+        panel2.print(drawCluster(color4, WIDTH/2 - clusterSize/2 + 10, 30, clusterSize, clusterId));
+
+        clusterId = 4;
+        sqrtTemp = (int) Math.round(Math.sqrt(sizeOfCluster[clusterId]));
+        System.out.println(clusterId + " : " + sizeOfCluster[clusterId] + " sqrt : " + sqrtTemp);
+        if (sizeOfCluster[clusterId] > 0)
+        panel2.print(drawCluster(color5, WIDTH/4 - clusterSize/2 + 10, (HEIGHT - clusterSize - 10)/2, clusterSize, clusterId));
+        
+        clusterId = 5;
+        sqrtTemp = (int) Math.round(Math.sqrt(sizeOfCluster[clusterId]));
+        System.out.println(clusterId + " : " + sizeOfCluster[clusterId] + " sqrt : " + sqrtTemp);
+        if (sizeOfCluster[clusterId] > 0)
+        panel2.print(drawCluster(color6, WIDTH - WIDTH/4 - clusterSize/2 + 10, (HEIGHT - clusterSize - 10)/2, clusterSize, clusterId));
+        
+        clusterId = 6;
+        sqrtTemp = (int) Math.round(Math.sqrt(sizeOfCluster[clusterId]));
+        System.out.println(clusterId + " : " + sizeOfCluster[clusterId] + " sqrt : " + sqrtTemp);
+        if (sizeOfCluster[clusterId] > 0)
+        panel2.print(drawCluster(color7, WIDTH/2 - clusterSize/2 + 10, (HEIGHT - clusterSize - 10)/2, clusterSize, clusterId));
         
         jScrollPane1.getViewport().add(panel2);
 //        System.out.println("szerokosc: "+jScrollPane1.getWidth());
@@ -627,6 +544,35 @@ public class MainFrame extends javax.swing.JFrame {
 //        System.out.println("wysokosc: "+jScrollPane1.getViewport().getHeight());
     }
     
+    private Graphics drawCluster(Color color, int x, int y, int clusterSize, int clusterId)
+    {
+             //np. drawSet(g, color, rozmiarZbioru, rozmiarElementu, idZbioru
+        //dodac napis (nazwa zbioru)
+/////////1
+        Graphics g = jScrollPane1.getGraphics();
+        //g.drawString(categories[0], 8, 9);
+//        Graphics2D g2 = (Graphics2D) g;
+        ((Graphics2D)g).setStroke(new BasicStroke(3));
+        g.setColor(color);
+        g.drawRect(x, y, clusterSize, clusterSize);
+        int tempx = 0;
+        int tempy = 0;
+        for (Element el : elementsMap.get(clusterId))
+        {   
+            g.setColor(Color.PINK);
+            g.fillOval(x+2+tempx, y+2+tempy, elementSize, elementSize);
+            tempx += elementSize+2;
+            if (tempx + elementSize > clusterSize)
+            {
+                tempy += elementSize + 4;
+                tempx = 0;
+            }
+        }
+        g.dispose();
+    
+        return g;
+    }
+        
     public void groupSet()
     {
         elementsMap = new HashMap<>();
@@ -671,8 +617,7 @@ public class MainFrame extends javax.swing.JFrame {
         //3 - {1, 2}
         //4 - {1, 3}
         //5 - {2, 3}
-        //6 - {1, 2, 3}
-        
+        //6 - {1, 2, 3}      
         jLabel5.setText("["+categories[0]+"] : "+elementsMap.get(0).size());
         jLabel6.setText("["+categories[1]+"] : "+elementsMap.get(1).size());
         jLabel10.setText("["+categories[2]+"] : "+elementsMap.get(2).size());
@@ -872,7 +817,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    public javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

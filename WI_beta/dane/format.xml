@@ -34,16 +34,7 @@
 	</element>
 	<element>
 		<name>name2</name>
-		<cat1>0</cat1>
-		<cat2>1</cat2>
-		<cat3>0</cat3>
-		<param1>param1</param1>
-		<param2>param2</param2>
-		<param3>param3</param3>
-	</element>
-	<element>
-		<name>name2</name>
-		<cat1>0</cat1>
+		<cat1>1</cat1>
 		<cat2>1</cat2>
 		<cat3>0</cat3>
 		<param1>param1</param1>
@@ -54,7 +45,25 @@
 		<name>name2</name>
 		<cat1>1</cat1>
 		<cat2>0</cat2>
-		<cat3>0</cat3>
+		<cat3>1</cat3>
+		<param1>param1</param1>
+		<param2>param2</param2>
+		<param3>param3</param3>
+	</element>
+	<element>
+		<name>name2</name>
+		<cat1>0</cat1>
+		<cat2>1</cat2>
+		<cat3>1</cat3>
+		<param1>param1</param1>
+		<param2>param2</param2>
+		<param3>param3</param3>
+	</element>
+	<element>
+		<name>name2</name>
+		<cat1>1</cat1>
+		<cat2>1</cat2>
+		<cat3>1</cat3>
 		<param1>param1</param1>
 		<param2>param2</param2>
 		<param3>param3</param3>
