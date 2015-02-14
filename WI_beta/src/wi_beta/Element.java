@@ -16,6 +16,17 @@ public class Element {
     public String param1;
     public String param2;
     public String param3;
+    public int posX;
+    public int posY;
+    public boolean isSelected = false;
+
+    public boolean isIsSelected() {
+        return isSelected;
+    }
+
+    public void setIsSelected(boolean isSelected) {
+        this.isSelected = isSelected;
+    }
 
     public String getName() {
         return name;
@@ -73,5 +84,23 @@ public class Element {
         this.param3 = param3;
     }
     
+    public int getPosX()
+    {
+        return posX;
+    }
     
+    public void setPosX(int posX)
+    {
+        this.posX = posX;
+    }
+    
+    public int getPosY()
+    {
+        return posY;
+    }
+    
+    public void setPosY(int posY)
+    {
+        this.posY = posY;
+    }
 }
