@@ -46,6 +46,8 @@ public class MainFrame extends javax.swing.JFrame {
     public File inputFile;
     public File outputFile;
     
+    public Element editableElement = null;
+    
     public String[] categories;
     
     private Integer[] sizeOfCluster;
@@ -59,7 +61,7 @@ public class MainFrame extends javax.swing.JFrame {
     public Color color6 = Color.MAGENTA;
     public Color color7 = Color.CYAN;
     
-    private Integer elementSize = 12;
+    private Integer elementSize = 22;
     
     private int WIDTH;
     private int HEIGHT;
@@ -88,6 +90,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel18.setText("cecha: ");
         
         jButton1.setEnabled(false);
+        jButton3.setEnabled(false);
         
 //        color4 = new Color((color1.getRGB() + color2.getRGB())/2);
 //        color5 = new Color((color1.getRGB() + color3.getRGB())/2);
@@ -140,6 +143,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
@@ -174,14 +178,14 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel4.setText("ilość elementów:");
 
-        jButton1.setText("Dodaj obiekt");
+        jButton1.setText("Dodaj");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Przerysuj");
+        jButton2.setText("Usuń");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -190,53 +194,64 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel15.setText("nazwa:");
 
+        jButton3.setText("Edytuj element");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(45, 45, 45))
             .addComponent(jSeparator2)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel7))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel8))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel9))
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel14))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel19))
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel17)
-                    .addComponent(jLabel18))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel15)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel19))
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel17)
+                            .addComponent(jLabel18))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel7))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel8))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel9))
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel14))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,7 +286,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 163, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -286,10 +301,12 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGap(5, 5, 5)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
-                .addGap(18, 18, 18))
+                .addComponent(jButton3)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
+                .addContainerGap())
         );
 
         jMenu1.setText("Plik");
@@ -351,7 +368,7 @@ public class MainFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
@@ -365,7 +382,6 @@ public class MainFrame extends javax.swing.JFrame {
 
  //dodawanie obiektu
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //this.setVisible(false);
         new AddElementFrame(this); 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -414,7 +430,6 @@ public class MainFrame extends javax.swing.JFrame {
                     jLabel4.setText("ile: "+elementsList.size());
                     
                     groupSet();
-//                    reprintScreen();
                     jButton1.setEnabled(true);
                     reprintScreen();
                      } catch (FileNotFoundException ex) {
@@ -428,24 +443,23 @@ public class MainFrame extends javax.swing.JFrame {
 
 //usuwanie elementu    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        for (Element el : elementsList)
+        {
+            if (el.isIsSelected())
+            {
+                elementsList.remove(el);
+                break;
+            }  
+        }
+        
         reprintScreen();
-
         //TODO - roundUP - pierwiastek bedzie rozmiarem zbioru : ilosc elementow*rozmiarEL
-        System.out.println("9: "+Math.round(Math.sqrt(9)));
-        System.out.println("10: "+Math.round(Math.sqrt(10)));
-        System.out.println("11: "+Math.round(Math.sqrt(11)));
-        System.out.println("12: "+Math.round(Math.sqrt(12)));
-        System.out.println("13: "+Math.round(Math.sqrt(13)));
-        System.out.println("14: "+Math.round(Math.sqrt(14)));
-        System.out.println("15: "+Math.round(Math.sqrt(15)));
-        System.out.println("16: "+Math.round(Math.sqrt(16)));
-        System.out.println("16: "+Math.round(Math.sqrt(17)));
-        //jLabel4.setText("ile: "+elementsList.size());
     }//GEN-LAST:event_jButton2ActionPerformed
 
 //zapis zbioru    
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        JFileChooser fc = new JFileChooser("F:/java/projects/WI_beta/dane");   
+//        JFileChooser fc = new JFileChooser("F:/java/projects/WI_beta/dane");
+        JFileChooser fc = new JFileChooser("F:/dev/git/clusterTree/WI_beta/dane");
 //        JFileChooser fc = new JFileChooser("C:/Users/student/Documents/GitHub/clusterTree/WI_beta/dane"); 
         fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
         int value = fc.showOpenDialog(null);
@@ -459,6 +473,7 @@ public class MainFrame extends javax.swing.JFrame {
                 createXML();
             }
         }
+        reprintScreen();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
 //nowy projekt    
@@ -470,14 +485,14 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel4.setText("Ilość elementów: "+elementsList.size());
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
+//obsluga klikniecia myszy    
     private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
         
         int elX;
         int elY;
         int x = evt.getX();
         int y = evt.getY();
-//        System.out.println("getX: "+x);
-//        System.out.println("getY: "+y);
+        boolean ifSelected = false;
         
         for(Element el : elementsList)
         {
@@ -486,19 +501,40 @@ public class MainFrame extends javax.swing.JFrame {
             if (x <= (elX + elementSize + 2) && x >= elX
                    && y <= (elY + elementSize + 4) && y >= elY)
             {
-                el.setIsSelected(true);
-                
+                el.setIsSelected(true);;
+                ifSelected = true;
+                editableElement = el;
                 jLabel16.setText("cecha: "+el.getParam1());
                 jLabel17.setText("cecha: "+el.getParam2());
                 jLabel18.setText("cecha: "+el.getParam3());
                 jLabel19.setText(el.getName());
             }
             else
+            {
                 el.setIsSelected(false);
+            }
         }
-        reprintScreen();
+        if (ifSelected)
+        {
+            jButton3.setEnabled(true);
+        }
+        else
+        {
+            jLabel16.setText("cecha: ");
+            jLabel17.setText("cecha: ");
+            jLabel18.setText("cecha: ");
+            jLabel19.setText("");
+            jButton3.setEnabled(false);
+        }
         
+        reprintScreen();   
     }//GEN-LAST:event_jScrollPane1MouseClicked
+
+//edycja elementu    
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        if (editableElement != null)
+            new EditElementFrame(this, editableElement);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -559,69 +595,55 @@ public class MainFrame extends javax.swing.JFrame {
         
         jScrollPane1.removeAll();
         jScrollPane1.getGraphics().clearRect(1, 1, jScrollPane1.getViewport().getWidth(), jScrollPane1.getViewport().getHeight());
-          
-        JPanel panel2 = new JPanel();
-        panel2.setSize(1200, 200);
-       // panel2.print(g);
 
         int clusterId;
         int sqrtTemp;
         int clusterSize = 100;
         
-        System.out.println("=========================================");
-        
         clusterId = 0;
-        sqrtTemp = (int) Math.round(Math.sqrt(sizeOfCluster[clusterId]));
-        System.out.println(clusterId + " : " + sizeOfCluster[clusterId] + " sqrt : " + sqrtTemp);
+//        sqrtTemp = (int) Math.round(Math.sqrt(sizeOfCluster[clusterId]));
+//        System.out.println(clusterId + " : " + sizeOfCluster[clusterId] + " sqrt : " + sqrtTemp);
         jScrollPane1.print(drawCluster(color1, 10, 10, clusterSize + clusterSize/2, clusterId));
         
         clusterId = 1;
-        sqrtTemp = (int) Math.round(Math.sqrt(sizeOfCluster[clusterId]));
-        System.out.println(clusterId + " : " + sizeOfCluster[clusterId] + " sqrt : " + sqrtTemp);
+//        sqrtTemp = (int) Math.round(Math.sqrt(sizeOfCluster[clusterId]));
+//        System.out.println(clusterId + " : " + sizeOfCluster[clusterId] + " sqrt : " + sqrtTemp);
         jScrollPane1.print(drawCluster(color2, WIDTH - 10 - clusterSize - clusterSize/2, 10, clusterSize + clusterSize/2, clusterId));
         
         clusterId = 2;
-        sqrtTemp = (int) Math.round(Math.sqrt(sizeOfCluster[clusterId]));
-        System.out.println(clusterId + " : " + sizeOfCluster[clusterId] + " sqrt : " + sqrtTemp);
+//        sqrtTemp = (int) Math.round(Math.sqrt(sizeOfCluster[clusterId]));
+//        System.out.println(clusterId + " : " + sizeOfCluster[clusterId] + " sqrt : " + sqrtTemp);
         jScrollPane1.print(drawCluster(color3, WIDTH/2 - clusterSize + clusterSize/4 + 10, HEIGHT - clusterSize - clusterSize/2 - 10, clusterSize + clusterSize/2, clusterId));
         
         clusterId = 3;
-        sqrtTemp = (int) Math.round(Math.sqrt(sizeOfCluster[clusterId]));
-        System.out.println(clusterId + " : " + sizeOfCluster[clusterId] + " sqrt : " + sqrtTemp);
+//        sqrtTemp = (int) Math.round(Math.sqrt(sizeOfCluster[clusterId]));
+//        System.out.println(clusterId + " : " + sizeOfCluster[clusterId] + " sqrt : " + sqrtTemp);
         if (sizeOfCluster[clusterId] > 0)
         jScrollPane1.print(drawCluster(color4, WIDTH/2 - clusterSize/2 + 10, 30, clusterSize, clusterId));
 
         clusterId = 4;
-        sqrtTemp = (int) Math.round(Math.sqrt(sizeOfCluster[clusterId]));
-        System.out.println(clusterId + " : " + sizeOfCluster[clusterId] + " sqrt : " + sqrtTemp);
+//        sqrtTemp = (int) Math.round(Math.sqrt(sizeOfCluster[clusterId]));
+//        System.out.println(clusterId + " : " + sizeOfCluster[clusterId] + " sqrt : " + sqrtTemp);
         if (sizeOfCluster[clusterId] > 0)
         jScrollPane1.print(drawCluster(color5, WIDTH/4 - clusterSize/2 + 10, (HEIGHT - clusterSize - 10)/2, clusterSize, clusterId));
         
         clusterId = 5;
-        sqrtTemp = (int) Math.round(Math.sqrt(sizeOfCluster[clusterId]));
-        System.out.println(clusterId + " : " + sizeOfCluster[clusterId] + " sqrt : " + sqrtTemp);
+//        sqrtTemp = (int) Math.round(Math.sqrt(sizeOfCluster[clusterId]));
+//        System.out.println(clusterId + " : " + sizeOfCluster[clusterId] + " sqrt : " + sqrtTemp);
         if (sizeOfCluster[clusterId] > 0)
         jScrollPane1.print(drawCluster(color6, WIDTH - WIDTH/4 - clusterSize/2 + 10, (HEIGHT - clusterSize - 10)/2, clusterSize, clusterId));
         
         clusterId = 6;
-        sqrtTemp = (int) Math.round(Math.sqrt(sizeOfCluster[clusterId]));
-        System.out.println(clusterId + " : " + sizeOfCluster[clusterId] + " sqrt : " + sqrtTemp);
+//        sqrtTemp = (int) Math.round(Math.sqrt(sizeOfCluster[clusterId]));
+//        System.out.println(clusterId + " : " + sizeOfCluster[clusterId] + " sqrt : " + sqrtTemp);
         if (sizeOfCluster[clusterId] > 0)
         jScrollPane1.print(drawCluster(color7, WIDTH/2 - clusterSize/2 + 10, (HEIGHT - clusterSize - 10)/2, clusterSize, clusterId));
         
 //        jScrollPane1.getViewport().add(panel2);
-        
-//        panel2.addMouseListener(mouseClickAction());
-//        System.out.println("szerokosc: "+jScrollPane1.getWidth());
-//        System.out.println("wysokosc: "+jScrollPane1.getHeight());
-//        System.out.println("szerokosc: "+jScrollPane1.getViewport().getWidth());
-//        System.out.println("wysokosc: "+jScrollPane1.getViewport().getHeight());
     }
     
     private Graphics drawCluster(Color color, int x, int y, int clusterSize, int clusterId)
     {
-             //np. drawSet(g, color, rozmiarZbioru, rozmiarElementu, idZbioru
-        //dodac napis (nazwa zbioru)
 /////////1
         Graphics g = jScrollPane1.getGraphics();
         //g.drawString(categories[0], 8, 9);
@@ -633,14 +655,13 @@ public class MainFrame extends javax.swing.JFrame {
         int tempy = 0;
         for (Element el : elementsMap.get(clusterId))
         {   
-            
             el.setPosX(x+2+tempx);
             el.setPosY(y+2+tempy);
             
             g.setColor(Color.PINK);
             
             if (el.isIsSelected())
-                g.setColor(new Color(120, 35, 190));
+                g.setColor(new Color(120, 35, 180));
             
             g.fillOval(x+2+tempx, y+2+tempy, elementSize, elementSize);
             tempx += elementSize+2;
@@ -746,7 +767,7 @@ public class MainFrame extends javax.swing.JFrame {
             result += "\t</element>\n";
         }
         result += "</list>";
-        
+ 
         try (FileOutputStream fos = new FileOutputStream(outputFile); BufferedOutputStream bos = new BufferedOutputStream(fos)) {
             bos.write(result.getBytes());
             bos.flush();
@@ -793,16 +814,7 @@ public class MainFrame extends javax.swing.JFrame {
                             strLine = strLine.trim();
                             nline++;
                         }
-                        
-//                        System.out.println("mam kategorie.. aktualna linia:");
-//                        System.out.println(strLine);
-//                        if (!"</categories>".equals(strLine))
-//                        {
-//                            strLine = br.readLine();
-//                            strLine = strLine.trim();
-//                            nline++;
-//                        }
-                        
+
                         strLine = br.readLine();
                         strLine = strLine.trim();
                         nline++;
@@ -898,20 +910,10 @@ public class MainFrame extends javax.swing.JFrame {
             return list;
     }
     
-//    private MouseListener mouseClickAction() {
-//        
-//        int mouseX = MouseInfo.getPointerInfo().getLocation().x;
-//        int mouseY = MouseInfo.getPointerInfo().getLocation().y;
-//        System.out.println("================= MOUSE ===================");
-//        System.out.println("X: "+mouseX);
-//        System.out.println("Y: "+mouseY);
-//        
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<categories>
+	<category1>cate1</category1>
+	<category2>cate2</category2>
+	<category3>cate3</category3>
+</categories>
+<list>
+	<element>
+		<name>qwe</name>
+		<cat1>1</cat1>
+		<cat2>1</cat2>
+		<cat3>0</cat3>
+		<param1>1</param1>
+		<param2>2</param2>
+		<param3>3</param3>
+	</element>
+</list>
